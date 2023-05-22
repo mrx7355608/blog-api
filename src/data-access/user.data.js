@@ -4,6 +4,10 @@ async function findById(id) {
     return await UserModel.findById(id)
 }
 
+async function findByEmail(email) {
+    return await UserModel.findOne({ email })
+}
+
 async function updateUser(id, changes) {
     return await UserModel.findByIdAndUpdate(id, changes)
 }
