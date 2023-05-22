@@ -1,15 +1,18 @@
 import UserModel from '../models/user.model.js'
 
-async function findAll() {
-    // TODO: add pagination
-    return await UserModel.find({})
+async function findById(id) {
+    return await UserModel.findById(id)
 }
 
-async function findByGoogleId(googleId) {
-    return await UserModel.findOne({ googleId })
+async function updateUser(id, changes) {
+    return await UserModel.findByIdAndUpdate(id, changes)
 }
 
 async function deleteUser(id) {
     await UserModel.findByIdAndDelete(id)
     return null
+}
+
+async function insert(data) {
+    return await UserModel.create(data)
 }
