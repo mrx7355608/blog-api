@@ -20,3 +20,13 @@ async function deleteUser(id) {
 async function insert(data) {
     return await UserModel.create(data)
 }
+
+const usersDB = {
+    findById,
+    insert,
+    updateUser,
+    deleteUser,
+    findByEmail
+}
+
+export default usersDB
