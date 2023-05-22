@@ -53,8 +53,16 @@ const userSchema = new mongoose.Schema({
         default: []
     },
     socialLinks: socialSchema
+}, {
+    timestamps: true,
+    toJSON: {
+        virtuals: true
+    }
 })
 
+userSchema.virtual('fullname').get(function() {
+    return `${this.fname} ${this.lname}`
+})
 
 const UserModel = mongoose.model('User', userSchema)
 export default UserModel
