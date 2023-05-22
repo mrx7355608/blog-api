@@ -1,11 +1,30 @@
 import mongoose from 'mongoose'
 
+const socialSchema = new mongoose.Schema({
+    facebook: {
+        type: String,
+        default: ''
+    },
+    twitter: {
+        type: String,
+        default: ''
+    },
+    instagram: {
+        type: String,
+        default: ''
+    },
+    linkedIn: {
+        type: String,
+        default: ''
+    },
+})
+
 const userSchema = new mongoose.Schema({
-    googleId: {
+    fname: {
         type: String,
         required: true
     },
-    name: {
+    lname: {
         type: String,
         required: true
     },
@@ -15,7 +34,11 @@ const userSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        required: true
+        default: ''
+    },
+    password: {
+        type: String,
+        required: true 
     },
     blogs: {
         type: [mongoose.Schema.Types.ObjectId],
@@ -24,7 +47,12 @@ const userSchema = new mongoose.Schema({
     bio: {
         type: String,
         default: ''
-    }
+    },
+    writingCategories: {
+        type: [String],
+        default: []
+    },
+    socialLinks: socialSchema
 })
 
 
