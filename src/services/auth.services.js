@@ -1,6 +1,6 @@
 import authDataValidator from '../validators/auth.validators.js'
 
-export default function AuthServices ({ usersDB }) {
+export default function AuthServices ({ usersDB, hashingServices }) {
     
     // SIGNUP
     async function signup(userData) {
@@ -12,7 +12,7 @@ export default function AuthServices ({ usersDB }) {
         // Check if user exists
         const user = await usersDB.findByEmail(email)
         if (user) {
-            throw new ApiError('User already exists'. 400)
+            throw new ApiError('User already exists', 400)
         }
 
         // Hash password
@@ -25,4 +25,6 @@ export default function AuthServices ({ usersDB }) {
         })
         return newUser
     }
+
+    return { signup }
 }
