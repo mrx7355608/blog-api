@@ -5,6 +5,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import config from '../config/index.js'
 import { catch404, globalErrorHandler } from './utils/errorHandlers.js'
+import authRouter from './routes/auth.routes.js'
 
 const app = express()
 
@@ -17,6 +18,9 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+// ROUTES
+app.use('/auth', authRouter)
 
 // ERROR HANDLERS
 app.use(catch404)
