@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 
-export default function HashingServices {
+export default function HashingServices () {
     // HASHES PASSWORD
     async function hash(string) {
         const hashedString = await bcrypt.hash(string, 12)
@@ -15,6 +15,4 @@ export default function HashingServices {
 
     return { hash, compare }
 }
-
-export default HashingServices
 

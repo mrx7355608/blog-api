@@ -1,5 +1,5 @@
 function makeRequestHandler(controller) {
-    return async function (req, res) {
+    return async function (req, res, next) {
         // Request data
         const httpRequestObject = {
             params: req.params,
@@ -13,9 +13,7 @@ function makeRequestHandler(controller) {
             (resp) => {
                 return res.status(resp.statusCode).json(resp.body)
             }
-        ).catch((err) => {
-            return res.status(500).json({ error: 'Something went wrong' })
-        })
+        ).catch((err) => next(err))
     }
 }
 
