@@ -4,8 +4,11 @@ import hpp from 'hpp'
 import cors from 'cors'
 import morgan from 'morgan'
 import config from '../config/index.js'
+import passport from 'passport'
+import session from 'express-session'
 import { catch404, globalErrorHandler } from './utils/errorHandlers.js'
 import authRouter from './routes/auth.routes.js'
+import './passportSetup.js'
 
 const app = express()
 
@@ -16,6 +19,18 @@ app.use(cors({
     origin: config.clientUrl,
     credentials: true
 }))
+// TODO: setup mongodb store for sessions
+app.use(session({
+    secret: config.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true
+    }
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
