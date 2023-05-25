@@ -10,6 +10,11 @@ export default function AuthControllers() {
     // SIGNUP 
     async function signup(httpRequestObject) {
         const data = httpRequestObject.body
+
+        if (!data || Object.keys(data).length < 1) {
+            throw new ApiError('No data is given', 400)
+        }
+
         const userData = {
             fname: data.fname,
             lname: data.lname,

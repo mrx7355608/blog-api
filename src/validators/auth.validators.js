@@ -27,13 +27,13 @@ const signupValidationSchema = joi.object({
         'string.empty': 'Password cannot be empty',
         'string.min': 'Password should be 10 characters long at least',
         'string.max': 'Password cannot be longer than 30 characters',
-        'string.base': 'Password should be a text',
+        'string.base': 'Password should be a text value',
     }),
     confirmPassword: joi.valid(joi.ref('password')).required().messages({
         'any.only': 'Passwords do not match',
         'any.required': 'Confirm your password to signup'
     })
-})
+}).options({ allowUnknown: true })
 
 function authDataValidator(data) {
     const { error } = signupValidationSchema.validate(data)

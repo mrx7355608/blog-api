@@ -1,4 +1,5 @@
 import authDataValidator from '../validators/auth.validators.js'
+import ApiError from '../utils/ApiError.js'
 
 export default function AuthServices ({ usersDB, hashingServices }) {
     
@@ -19,7 +20,7 @@ export default function AuthServices ({ usersDB, hashingServices }) {
         const hashedPassword = await hashingServices.hash(password)
         
         // Create a new user
-        const newUser = await userDB.insert({ 
+        const newUser = await usersDB.insert({ 
             ...userData,
             password: hashedPassword
         })

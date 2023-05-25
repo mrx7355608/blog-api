@@ -35,7 +35,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // ROUTES
-app.use('/auth', authRouter)
+app.use('/api/v1/auth', authRouter)
 
 // ERROR HANDLERS
 app.use(catch404)

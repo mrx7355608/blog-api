@@ -2,7 +2,7 @@ import passport from 'passport'
 import { Strategy } from 'passport-local'
 
 passport.use(
-    new Strategy({ usernameField: 'email' }, function (email, password, done) {
+    new Strategy({ usernameField: 'email' }, async function (email, password, done) {
         // Check if user exists
         const user = await userDB.findByEmail(email)
         if (!user) return done(null, false)
@@ -20,7 +20,7 @@ passport.use(
 passport.serializeUser(function (user, done) {
     return done(null, user.id)
 })
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(async function (id, done) {
     const user = await usersDB.findById(id)
     return done(null, user)
 })
