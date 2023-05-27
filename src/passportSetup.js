@@ -1,10 +1,14 @@
 import passport from 'passport'
 import { Strategy } from 'passport-local'
+import usersDB from './data-access/user.data.js'
+import HashServices from './services/hash.services.js'
+
+const hashServices = HashServices()
 
 passport.use(
     new Strategy({ usernameField: 'email' }, async function (email, password, done) {
         // Check if user exists
-        const user = await userDB.findByEmail(email)
+        const user = await usersDB.findByEmail(email)
         if (!user) return done(null, false)
 
         // Check if passowrds match
