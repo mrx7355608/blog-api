@@ -9,7 +9,21 @@ async function findByEmail(email) {
 }
 
 async function updateUser(id, changes) {
-    return await UserModel.findByIdAndUpdate(id, changes)
+    const updatedUser = await UserModel.findByIdAndUpdate(
+    id, 
+    changes, 
+    {
+      new: true,
+      select: {
+        email: 0,
+        password: 0,
+        updatedAt: 0,
+        __v: 0,
+      }
+    },
+  )
+
+  return updatedUser
 }
 
 async function deleteUser(id) {
