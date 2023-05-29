@@ -8,6 +8,7 @@ import passport from 'passport'
 import session from 'express-session'
 import { catch404, globalErrorHandler } from './utils/errorHandlers.js'
 import authRouter from './routes/auth.routes.js'
+import userRouter from './routes/user.routes.js'
 import './passportSetup.js'
 
 const app = express()
@@ -19,6 +20,7 @@ app.use(cors({
     origin: config.clientUrl,
     credentials: true
 }))
+
 // TODO: setup mongodb store for sessions
 app.use(session({
     secret: config.sessionSecret,
@@ -36,6 +38,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // ROUTES
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/user', userRouter)
 
 // ERROR HANDLERS
 app.use(catch404)
