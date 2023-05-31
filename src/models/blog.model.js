@@ -1,10 +1,31 @@
 import mongoose from 'mongoose'
 
 const blogSchema = new mongoose.Schema({
-    title: String,
-    body: String,
-    tags: [String],
-    coverPhoto: String,
+    title: {
+        type: String,
+        required: true
+    },
+    body: {
+        type: String,
+        required: true
+    },
+    slug: {
+        type: String,
+        required: true
+    },
+    tags: {
+
+        type: [String],
+        required: true
+    },
+    coverPhoto: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, { 
     timestamps: true 
 })
