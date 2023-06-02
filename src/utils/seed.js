@@ -8,9 +8,9 @@ import { faker } from '@faker-js/faker';
 
 // CONNECT TO DATABASE
 async function connect() {
-    await mongoose.connect(
-        'mongodb+srv://abcadminn:QFvXNJwPBydl12Tm@blog.pgsnghz.mongodb.net/?retryWrites=true&w=majority'
-    );
+    await mongoose.connect('');
+
+
     console.log('Connected to database');
 }
 
