@@ -10,6 +10,7 @@ import { catch404, globalErrorHandler } from './utils/errorHandlers.js';
 import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/user.routes.js';
 import './passportSetup.js';
+import blogRouter from './routes/blog.routes.js';
 
 const app = express();
 
@@ -41,8 +42,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // ROUTES
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/blogs', blogRouter)
 
 // ERROR HANDLERS
 app.use(catch404);
