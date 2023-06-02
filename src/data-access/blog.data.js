@@ -1,11 +1,12 @@
 import BlogModel from '../models/blog.model.js'
 
 async function findAll() {
-    return await BlogModel.find({})
+    return await BlogModel.find({}).populate('author', 'fname lname photo')
 }
 
 async function findById(id) {
-    return await BlogModel.findById(id)
+    return await BlogModel.findById(id).populate('author', 'fname lname photo')
+
 }
 
 async function insert(data) {
@@ -14,7 +15,11 @@ async function insert(data) {
 }
 
 async function update(id, changes) {
-    const updatedBlog = await BlogModel.findById(id)
+    const updatedBlog = await BlogModel.findByIdAndUpdate(
+        id, 
+        changes, 
+        { new: true }
+    )
     return updatedBlog
 }
 
