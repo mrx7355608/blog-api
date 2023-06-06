@@ -1,4 +1,5 @@
 import BlogServices from '../services/blog.services.js';
+import ApiError from '../utils/ApiError.js';
 
 const blogServices = BlogServices();
 
@@ -25,6 +26,10 @@ export default function BlogControllers() {
 
     async function postBlog(httpRequestObject) {
         const blogData = httpRequestObject.body;
+        if (!blogData || Object.keys(blogData).length < 1) {
+            throw new ApiError('Empty blog cannot be created', 400);
+        }
+
         const filteredBlogData = filterData(blogData);
         const userId = String(httpRequestObject.user._id);
         const newBlog = await blogServices.addBlog(userId, filteredBlogData);
